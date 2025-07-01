@@ -4,12 +4,12 @@ function WordForm() {
   const [value, setValue] = React.useState('');
 
   const handleChange = (event) => {
-    setValue(event.target.value);
+    setValue(event.target.value.toUpperCase());
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(value.toUpperCase());
+    console.log({ value });
     setValue('');
   };
 
