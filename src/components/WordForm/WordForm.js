@@ -1,6 +1,6 @@
 import React from 'react';
 
-function WordForm() {
+function WordForm({ handleSubmitGuess }) {
   const [value, setValue] = React.useState('');
 
   const handleChange = (event) => {
@@ -9,7 +9,7 @@ function WordForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log({ value });
+    handleSubmitGuess(value);
     setValue('');
   };
 
@@ -23,6 +23,7 @@ function WordForm() {
         type="text"
         required
         pattern="[a-zA-Z]{5}"
+        title="Please enter a 5 letter word"
       />
     </form>
   );
