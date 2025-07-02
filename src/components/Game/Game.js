@@ -5,6 +5,7 @@ import { WORDS } from '../../data';
 import WordForm from '../WordForm';
 import WordList from '../WordList';
 import { NUM_OF_GUESSES_ALLOWED } from '../../constants';
+import { checkGuess } from '../../game-helpers';
 
 // Pick a random word on every pageload.
 const answer = sample(WORDS);
@@ -29,7 +30,7 @@ function Game() {
 
   return (
     <div className="game-wrapper">
-      <WordList guesses={guesses} />
+      <WordList guesses={guesses} answer={answer} />
       {isGameOver && <p>Game over! You've used all your guesses!</p>}
       <WordForm handleSubmitGuess={handleSubmitGuess} guesses={guesses} />
     </div>
