@@ -1,6 +1,6 @@
 import React from 'react';
 
-function WordForm({ handleSubmitGuess }) {
+function WordForm({ handleSubmitGuess, gameStatus }) {
   const [value, setValue] = React.useState('');
 
   const handleChange = (event) => {
@@ -24,6 +24,7 @@ function WordForm({ handleSubmitGuess }) {
         required
         pattern="[a-zA-Z]{5}"
         title="Please enter a 5 letter word"
+        disabled={gameStatus === 'sad'}
       />
     </form>
   );
