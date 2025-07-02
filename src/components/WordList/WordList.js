@@ -1,10 +1,14 @@
 import React from 'react';
+import WordGuess from '../WordGuess';
+import { range } from '../../utils';
+import { NUM_OF_GUESSES_ALLOWED } from '../../constants';
 
 function WordList({ guesses }) {
   return (
     <div className="guess-results">
-      {guesses.map(({ guess, id }) => {
-        return <p className="guess" key={id}>{guess}</p>;
+      {range(NUM_OF_GUESSES_ALLOWED).map((index) => {
+        const guessObj = guesses[index];
+        return <WordGuess value={guessObj} key={index} />;
       })}
     </div>
   );
