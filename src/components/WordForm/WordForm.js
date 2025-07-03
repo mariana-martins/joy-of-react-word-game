@@ -24,7 +24,7 @@ function WordForm({ handleSubmitGuess, gameStatus }) {
         required
         pattern="[a-zA-Z]{5}"
         title="Please enter a 5 letter word"
-        disabled={gameStatus === 'sad'}
+        disabled={gameStatus === 'lost' || gameStatus === 'won'}
       />
     </form>
   );

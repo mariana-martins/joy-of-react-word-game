@@ -4,8 +4,9 @@ import { sample } from '../../utils';
 import { WORDS } from '../../data';
 import WordForm from '../WordForm';
 import WordList from '../WordList';
+import WinBanner from '../WinBanner';
+import LostBanner from '../LostBanner';
 import { NUM_OF_GUESSES_ALLOWED } from '../../constants';
-import { checkGuess } from '../../game-helpers';
 
 // Pick a random word on every pageload.
 const answer = sample(WORDS);
@@ -18,7 +19,8 @@ function Game() {
   // Determine game status based on guesses and answer
   const isWon = guesses.some(guess => guess.guess === answer);
   const isLost = guesses.length >= NUM_OF_GUESSES_ALLOWED && !isWon;
-  const gameStatus = isWon ? 'happy' : isLost ? 'sad' : null;
+  const gameStatus = isWon ? 'won' : isLost ? 'lost' : null;
+  const guessesNumber = guesses.length;
 
   function handleSubmitGuess(guess) {
     if (gameStatus) {
@@ -39,24 +41,8 @@ function Game() {
         guesses={guesses}
         gameStatus={gameStatus}
       />
-      {gameStatus && (
-        <div className={`${gameStatus} banner`}>
-          {gameStatus === 'happy' && (
-            <p>
-              <strong>Congratulations!</strong> Got it in
-              <strong>
-                {guesses.length === 1 ? '1 guess' : `${guesses.length} guesses`}
-              </strong>
-              .
-            </p>
-          )}
-          {gameStatus === 'sad' && (
-            <p>
-              Sorry, the correct answer is <strong>{answer}</strong>.
-            </p>
-          )}
-        </div>
-      )}
+      {gameStatus === 'won' && <WinBanner guessesNumber={guessesNumber} />}
+      {gameStatus === 'lost' && <LostBanner answer={answer} />}
     </div>
   );
 }
